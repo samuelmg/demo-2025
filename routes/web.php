@@ -13,3 +13,4 @@ Route::get('hola-mundo', function () {
 
 Route::get('contacto', [ContactoController::class, 'contacto']);
 Route::post('recibe-formulario', [ContactoController::class, 'recibeFormulario']);
+Route::get('lista-contactos', [ContactoController::class, 'listaContactos']);
