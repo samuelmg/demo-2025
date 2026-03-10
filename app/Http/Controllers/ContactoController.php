@@ -7,36 +7,74 @@ use Illuminate\Http\Request;
 
 class ContactoController extends Controller
 {
-    public function contacto()
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
     {
-        return view('contacto');
+        return view('contactos.contacto-index')
+            ->with([
+                'contactos' => Contacto::all()
+            ]);
     }
 
-    public function recibeFormulario(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
     {
-        // Validar datos
+        return view('contactos.contacto-create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
         $request->validate([
-            'nombre' => 'required|min:5',
+            'nombre' => 'required',
             'correo' => 'required|email',
-            'mensaje' => ['required', 'min:10'],
+            'mensaje' => 'required|min:10'
         ]);
 
-        // dd($request->all());
-        // Insertar a DB
         $contacto = new Contacto();
         $contacto->nombre = $request->nombre;
         $contacto->correo = $request->correo;
         $contacto->mensaje = $request->mensaje;
         $contacto->save();
 
-        // Redirigir a otra página
-        return redirect()->back();
+        return redirect()->route('contactos.index');
     }
 
-    public function listaContactos()
+    /**
+     * Display the specified resource.
+     */
+    public function show(Contacto $contacto)
     {
-        $contactos = Contacto::all();
-        
-        return view('lista-contactos')->with(['contactos' => $contactos]);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Contacto $contacto)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Contacto $contacto)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Contacto $contacto)
+    {
+        //
     }
 }

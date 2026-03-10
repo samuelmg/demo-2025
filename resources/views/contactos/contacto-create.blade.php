@@ -19,7 +19,7 @@
         </div>
     @endif --}}
 
-    <form action="recibe-formulario" method="POST">
+    <form action="/contactos" method="POST">
         @csrf
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" value="{{ old('nombre') }}">

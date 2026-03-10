@@ -11,6 +11,4 @@ Route::get('hola-mundo', function () {
     return view('hola');
 });
 
-Route::get('contacto', [ContactoController::class, 'contacto']);
-Route::post('recibe-formulario', [ContactoController::class, 'recibeFormulario']);
-Route::get('lista-contactos', [ContactoController::class, 'listaContactos']);
+Route::resource('contactos', ContactoController::class);
