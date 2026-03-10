@@ -9,10 +9,14 @@
 <body>
     <h1>Lista Contactos</h1>
 
+    <p>
+        <a href="{{ route('contactos.create') }}">Enviar nuevo mensaje de contacto</a>
+    </p>
+
     <ul>
         @foreach ($contactos as $contacto)
             <li>
-                {{ $contacto->nombre }} - {{ $contacto->correo }}
+                <a href="{{ route('contactos.show', $contacto) }}">{{ $contacto->nombre }}</a> - {{ $contacto->correo }}
             </li>
         @endforeach
     </ul>

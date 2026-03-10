@@ -51,7 +51,10 @@ class ContactoController extends Controller
      */
     public function show(Contacto $contacto)
     {
-        //
+        return view('contactos.contacto-show')
+            ->with([
+                'contacto' => $contacto
+            ]);
     }
 
     /**
@@ -59,7 +62,10 @@ class ContactoController extends Controller
      */
     public function edit(Contacto $contacto)
     {
-        //
+        return view('contactos.contacto-edit')
+            ->with([
+                'contacto' => $contacto
+            ]);
     }
 
     /**
@@ -67,7 +73,18 @@ class ContactoController extends Controller
      */
     public function update(Request $request, Contacto $contacto)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'correo' => 'required|email',
+            'mensaje' => 'required|min:10'
+        ]);
+
+        $contacto->nombre = $request->nombre;
+        $contacto->correo = $request->correo;
+        $contacto->mensaje = $request->mensaje;
+        $contacto->save();
+
+        return redirect()->route('contactos.show', $contacto);
     }
 
     /**
@@ -75,6 +92,7 @@ class ContactoController extends Controller
      */
     public function destroy(Contacto $contacto)
     {
-        //
+        $contacto->delete();
+        return redirect()->route('contactos.index');
     }
 }
